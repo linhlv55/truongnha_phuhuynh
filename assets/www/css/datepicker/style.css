@@ -1,0 +1,65 @@
+/* reset css */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+/*End reset css*/
+$( ".selector" ).selectmenu({
+   create: function(event, ui) {
+	alert("Hello");
+   }
+});
+body{
+	font-family: Arial, sans-serif;	
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.button{
+	background: rgba(0,0,0,0.8);
+	padding: 10px 20px;
+	margin-top: 8px;
+}
+.button:hover{
+	background: rgba(0,0,0,0.6)
+}
+.bl{
+	border-radius: 0px 15px 15px 0px ;
+}
+.br{
+	border-radius: 15px 0px 0px 15px;
+}
+#wrapper{
+	width: 400px;
+	margin: 10px auto;
+}
+h2{
+	display: block;
+	padding: 10px 0px;
+}
+#header,#footer1{
+	position: fixed;
+	background: rgba(255,0,0,0.8);
+	width: 450px;
+	height: 50px;
+}
+
+#header{
+	top: 0px;
+}
+#footer1{
+	bottom: 0px;
+}
+#footer1 a{
+	display: inline-block;
+	text-decoration: none;
+	color: white;
+	
+}
+#content{
+	margin: 35px 0px;
+	border: 1px solid #c2c2c2;
+}
+#content p{
+	padding: 5px 10px;
+}

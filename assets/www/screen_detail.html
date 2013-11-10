@@ -1,0 +1,479 @@
+﻿<html>
+    <head>
+        <title>Trường Nhà </title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		
+		<!-- This is css set icon -->
+        <link rel="stylesheet" type="text/css" href="css/icons.css" />    
+ 
+		<!-- This is css set background for app mobi -->
+		<link rel="stylesheet" type="text/css" href="css/src/main.css"  />
+		<link rel="stylesheet" type="text/css" href="css/src/appframework.css"  />
+		<link rel="stylesheet" type="text/css" href="css/src/android.css"  />
+		<link rel="stylesheet" type="text/css" href="css/src/win8.css"  />
+		<link rel="stylesheet" type="text/css" href="css/src/bb.css"  />
+		
+		<!-- This is css set badges, buttons, lists, forms, grid -->
+		<link rel="stylesheet" type="text/css" href="css/src/badges.css"  />
+		<link rel="stylesheet" type="text/css" href="css/src/buttons.css"  />
+		<link rel="stylesheet" type="text/css" href="css/src/lists.css"  />
+		<link rel="stylesheet" type="text/css" href="css/src/forms.css"  />
+		<link rel="stylesheet" type="text/css" href="css/src/grid.css"  />
+
+		<!-- This is css set actionsheet, popup, lists, selectBox -->
+		<link rel="stylesheet" type="text/css" href="plugins/css/af.actionsheet.css"  />
+		<link rel="stylesheet" type="text/css" href="plugins/css/af.popup.css"  />
+		<link rel="stylesheet" type="text/css" href="plugins/css/af.selectBox.css"  />
+		
+		<!-- This is css set Home Page - Writed by: Phạm Đức Bình -->
+		<link rel="stylesheet" type="text/css" href="css/index.css"  />
+		
+		<!-- his is javascript code supported by framework: To build UI and Core app mobile -->
+		<script type="text/javascript" charset="utf-8" src="./appframework.js"></script>
+		<script type="text/javascript" charset="utf-8" src="./ui/src/appframework.ui.js"></script>
+		
+        <script>
+
+            function loadedPanel(what) {
+                //We are going to set the badge as the number of li elements inside the target
+                $.ui.updateBadge("#aflink", $("#af").find("li").length);
+            }
+
+            function unloadedPanel(what) {
+                console.log("unloaded " + what.id);
+            }
+
+            if(!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
+                var script = document.createElement("script");
+                script.src = "plugins/af.desktopBrowsers.js";
+                var tag = $("head").append(script);
+            }
+           
+        </script>
+        
+		<script type="text/javascript" charset="utf-8" src="./plugins/af.actionsheet.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.css3animate.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.passwordBox.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.scroller.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.selectBox.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.touchEvents.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.touchLayer.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.popup.js"></script>
+		
+        <script type="text/javascript" charset="utf-8" src="./ui/transitions/all.js"></script>
+        <script type="text/javascript" charset="utf-8" src="./plugins/af.slidemenu.js"></script>
+		
+		<!--<script type="text/javascript" src="./cordova.js"></script>-->
+		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/connectServer.js"></script>
+		<script type="text/javascript" src="js/divattendance.js"></script>
+		<script type="text/javascript" src="js/divmark.js"></script>
+		<script type="text/javascript" src="js/dongbo.js"></script>
+		<script type="text/javascript" src="js/getDatabase.js"></script>
+		<script type="text/javascirpt" src="js/newUpdate.js"></script>
+        <script type="text/javascript">
+            /*
+			This function runs once the page is loaded, but appMobi is not yet active 
+            $.ui.animateHeaders=false;
+            var search=document.location.search.toLowerCase().replace("?","");
+			*/
+			var search="ios";
+            //if(!search)
+            $.os.useOSThemes=false;
+				document.addEventListener("deviceready", onDeviceReady, false);
+			$(document).on('backbutton',
+			function(e){
+
+					 e.preventDefault();
+			});
+			
+			<!-- PhoneGap is loaded and it is now safe to make calls PhoneGap methods -->
+			function onDeviceReady() {
+				checkConnection();
+			}
+
+			<!-- Android fix has too many buggy issues on iOS - can't preview with $.os.android -->
+            if(search) 
+            {
+
+               $.os.useOSThemes=true;
+                if(search=="win8")
+                    $.os.ie=true;
+                $.ui.ready(function(){
+                    $("#afui").get(0).className=search;
+                });
+            }
+            
+            var webRoot = "./";
+            //$.os.android=true;
+            $.ui.autoLaunch = false;
+            $.ui.openLinksNewTab = false;
+            //$.ui.resetScrollers=false;
+
+            $(document).ready(function(){
+                   $.ui.launch();
+
+            });
+            
+			
+            <!-- This code is used to run as soon as appMobi activates -->
+			/*
+            var onDeviceReady = function () {
+                AppMobi.device.setRotateOrientation("portrait");
+                AppMobi.device.setAutoRotate(false);
+                webRoot = AppMobi.webRoot + "";
+                //hide splash screen
+                AppMobi.device.hideSplashScreen();
+                $.ui.blockPageScroll(); //block the page from scrolling at the header/footer
+
+            };
+			*/
+
+            function showHide(obj, objToHide) {
+                var el = $("#" + objToHide)[0];
+
+                if (obj.className == "expanded") {
+                    obj.className = "collapsed";
+                } else {
+                    obj.className = "expanded";
+                }
+                $(el).toggle();
+
+            }
+
+            if($.os.android||$.os.ie||search=="android"){
+                $.ui.ready(function(){
+                    $("#main .list").append("<li><a id='toggleAndroidTheme'>Toggle Theme Color</a></li>");
+                    var $el=$("#afui");
+                    $("#toggleAndroidTheme").bind("click",function(e){
+                        if($el.hasClass("light"))
+                            $el.removeClass("light");
+                        else
+                            $el.addClass("light");
+                    });
+                });
+            }
+			$.ui.slideSideMenu = false;
+			
+			/*function showSideMenu(){
+				console.log("in hide side menu");
+				$.ui.toggleSideMenu(true);
+			}
+
+			function hideSideMenu(){
+				console.log("in show side menu");
+				$.ui.toggleSideMenu(false);
+				
+			}*/
+			
+			var checknetwork = 1;
+			
+			<!-- PhoneGap is loaded and it is now safe to make calls PhoneGap methods -->
+			
+			// function when div Login is loaded
+			function loadDivLogin()
+			{	
+				stateLogin = 0;
+				getInfo();
+				setTimeout(function () {
+					if( checkUser == 1){
+						login();
+					}
+					else{
+						logout();
+						console.log("du lieu sinh vien khong ton tai");
+					}
+				},1000);
+			}
+			
+			$(function() {
+
+				// Action on Click
+				
+				$( "#login" ).click(function() {
+				
+					$('#loading').show(); 		
+					myVar=setTimeout(login(),100);
+				});
+				
+				$( "#skip" ).click(function() {
+					$('#loadingnewdata').hide(); 		
+				});
+				
+				$( ".icon.settings.big.header-right" ).click(function() {
+					showSideMenu();
+				});
+				
+				$( "#tab1" ).click(function() {
+					successCBMarkStudent();
+				});
+				
+				$( "#tab2" ).click(function() {
+					successCBAttendance();
+				});
+				
+				$( "#tab3" ).click(function() {
+					openCBMarkStudent();
+				});
+				
+				$( ".icon.close.big" ).click(function() {
+					exit();
+				});
+				
+				$( ".icon.location.big").click(function() {
+					signout();
+				});
+				
+				$( ".close-menu" ).click(function() {
+					hideSideMenu();
+				});
+				$( "#update").click(function(){
+					$('#loading').show(); 		
+					myVar=setTimeout(getDataToDB(),10);
+					                   				
+				});
+				
+			});
+		</script>
+</head>
+    <body>
+		<!-- this is the main container div.  This way, you can have only part of your app use UI -->
+        <div id="afui">
+			<!-- div Content -->
+            <div id="content" >
+				<!--Trang login-->
+				<div id="div_login" class="panel" selected="true" data-load="loadDivLogin"  data-nav="none">
+					<header>
+						<h1>
+						<!--	<span class="logo-truong">Trường</span>
+							<span class="logo-nha">Nhà</span>-->
+							<span > Sổ Liên Lạc - Trường Nhà </span>
+						</h1>
+					</header>
+					<h2>Đăng nhập</h2>
+					<div>
+ 						<form name="login" action="" method="">
+ 							
+							<label for="username">Tài khoản</label>
+							<input type="text" id ="username" ></input>
+						
+							<label for="password">Mật khẩu</label>
+							<input type="password" name="password" id="password" ></input>
+ 						</form>
+						<a class="button" id="login">Đăng Nhập</a>
+        
+ 					</div>
+					<br><br><br><br>
+					<div class="text_item" data-appbuilder-object="text" data-position="static">
+						<p>
+							<strong>Giới thiệu.</strong>
+							Sổ liên lạc - Trường Nhà cho phép phụ huynh/học sinh theo dõi thông tin học tập, rèn luyện của học sinh khi nhà trường sử dụng dịch vụ quản lý trường học Trường Nhà ở địa chỉ: http://truongnha.com.
+						</p>
+						<p>
+							<strong>Hướng dẫn.</strong>
+							Để sử dụng sổ liên lạc này trước hết nhà trường phải sử dụng dịch vụ Trường Nhà tại địa chỉ http://truongnha.com. 
+						</p>
+
+						<p>
+							Tiếp theo, bạn phải liên hệ với nhà trường để có tài khoản của học sinh. Tài khoản sẽ gồm có Tên tài khoản và Mật khẩu. Có hai thông tin này bạn nhập vào trong phần Học sinh trên màn hình chính và phải kết nối mạng Internet. Thông tin điểm, rèn luyện của học sinh sẽ được tải về và lưu trên máy. Sau đó nếu không có kết nối mạng bạn vẫn có thể xem thông tin, nhưng để có thông tin cập nhật thì phải kết nối mạng và giáo viên hoặc nhà trường phải nhập điểm vào hệ thống Trường Nhà trước đó.
+						</p>
+
+						<p>
+							<strong>Phiên bản: </strong>
+							0.7
+						</p>
+
+						<p>
+							<strong>Hỗ trợ.</strong>
+							Nếu có bất kỳ vấn đề gì, xin gửi thông tin bằng email đến contact@truongnha.com.
+						</p>
+
+					</div>
+                </div>
+				<!-- end div login-->
+				
+				<!-- div dong bo-->
+				<div class="panel" title="Sổ liên lạc" id="div_dongbo"  data-nav="none" data-load="divSyncLoad"  > 
+					<script>
+                        var myScroller;
+                        $.ui.ready(function () {
+                            myScroller = $("#div_dongbo").scroller(); //Fetch the scroller from cache
+                            //Since this is a App Framework UI scroller, we could also do
+                            // myScroller=$.ui.scrollingDivs['webslider'];
+                            myScroller.addInfinite();
+                            myScroller.addPullToRefresh();
+                            //$.bind(myScroller, 'scrollend', function () {
+                              //  console.log("scroll end");
+                            //});
+							
+							
+                            $.bind(myScroller, "refresh-trigger", function () {
+                                this.setRefreshContent("Kéo - thả");
+                            });
+                            var hideClose;
+                            $.bind(myScroller, "refresh-release", function () {
+                                var that = this;
+								getDataToDB();
+                                this.setRefreshContent("Đang cập nhật dữ liệu...");
+                                clearTimeout(hideClose);
+                                hideClose = setTimeout(function () {
+                                    console.log("hiding manually refresh");
+                                    that.hideRefresh();
+                                }, 5000);
+                                return false; //tells it to not auto-cancel the refresh
+                            });
+
+                            $.bind(myScroller, "refresh-cancel", function () {
+                                clearTimeout(hideClose);
+                                console.log("cancelled");
+                            });
+                            myScroller.enable();
+							/*
+                            $.bind(myScroller, "infinite-scroll", function () {
+                                var self = this;
+                                console.log("infinite triggered");
+                                $(this.el).append("<div id='infinite' style='border:2px solid black;margin-top:10px;width:100%;height:20px'>Fetching content...</div>");
+								
+                                $.bind(myScroller, "infinite-scroll-end", function () {
+                                    $.unbind(myScroller, "infinite-scroll-end");
+                                    self.scrollToBottom();
+                                    setTimeout(function () {
+                                        $(self.el).find("#infinite").remove();
+                                        self.clearInfinite();
+                                        $(self.el).append("<div>This was loaded via inifinite scroll<br>More Content</div>");
+                                        self.scrollToBottom();
+                                    }, 3000);
+                                });
+                            });*/
+                            $("#webslider").css("overflow", "auto");
+                        });
+                    </script>
+					<header>
+						<h1>
+							Sổ liên lạc
+						<h1>
+					</header>
+					<div class="container" style="width:100%" data-appbuilder-object="container" data-position="static">
+						<div id="icon_refresh" class="icon refresh" data-appbuilder-object="text" data-position="static" style="text-align:right">
+							Kéo xuống để cập nhật
+						</div>
+					</div>
+					
+					<div class="container" style="width:100%" data-appbuilder-object="container" data-position="static">
+						<ul class="list" data-appbuilder-object="list" data-position="static">
+							<li>
+								<a id="mark_old" href="#div_mark">Kiểm tra<span id="count_new_mark" class="af-badge lr">0</span></a>
+							</li>
+							<li>
+								<a id="attendance_old" href="#page_attendance">Điểm danh<span id="count_new_attendance" class="af-badge lr">0</span></a>
+							</li>
+							<li>
+								<a id=="monhoc_old" href="#div_profile">Thông tin học sinh</a>
+							</li>
+							<li>
+								<a href="#page_about">Hướng dẫn</a>
+							</li>
+							<a class="button" id="update"> Cập Nhật </a>
+						</ul>
+						
+					</div>
+				</div><!-- end div dong bo-->
+				
+				
+				<!-- div mark -->
+				<div class="panel" title="Điểm học tập" id="div_mark" data-nav="none" data-appbuilder-object="page" data-load="divMarkLoad" data-unload="divMarkUnload" >
+					
+					<!-- Footer -->
+					<footer id="footer_main">
+						<a href='#about' id="tab1" class='icon calendar'>Theo thời gian</a>
+						<a href='#about' id="tab3" class='icon paper'>Điểm theo môn</a>
+					</footer>
+					
+					<!-- Content -->
+					<h2>Sổ liên lạc - Trường Nhà </h2>
+					
+					<div id="color">
+						<h4 class = "color-mieng">Miệng </h4> 
+						<h4 class = "color-15phut">- 15 Phút  </h4> 
+						<h4 class = "color-1tiet">- Một tiết </h4> 
+						<h4 class = "color-thi">- Thi </h4>
+						<h4 class = "color-hocky">- TB Học kỳ </h4>
+					</div>
+					
+					<div id="table-mark" class="text_item" data-appbuilder-object="text" data-position="static" style="">
+						<table cellspacing="0" id="table_mark" BORDER="1">
+						</table>
+					</div>
+					<div id="displayContent">
+						<table cellspacing="0" id="table-div-main" BORDER="1">
+						</table>
+					</div>
+				</div> 
+				<!-- end div main-->
+				
+				<div class="panel" title="Điểm danh" data-nav="none" id="page_attendance" data-appbuilder-object="page" style="" data-load="successCBAttendance" data-unload="divAttendanceUnload">
+					<table cellspacing="0" id="table-attendance" BORDER="1">
+					</table>
+				</div>
+				
+				
+				<!-- div profile-->
+				<div title="Học sinh" id="div_profile" class="panel"  data-load="displayProfile" data-nav="nav_profile">
+					
+					<div class="container" style="width:100%" data-appbuilder-object="container" data-position="static">
+						<h2>Thông tin học sinh</h2>
+						<table>
+							<tbody id = "content-table">
+								
+							</tbody>
+						</table>
+						<a class="button" href="#" onClick="signout()" style="" data-appbuilder-object="button" data-position="static" data-transition="slide">Gỡ bỏ tài khoản này</a>
+					</div>
+                </div>
+				<!-- end div profile -->
+				
+				<!-- page about app -->
+				<div class="panel" title="Giới thiệu" data-nav="none" id="page_about"  style="">
+					<div class="text_item" data-appbuilder-object="text" data-position="static">
+						<p>
+							<strong>Giới thiệu.</strong>
+							Sổ liên lạc - Trường Nhà cho phép phụ huynh/học sinh theo dõi thông tin học tập, rèn luyện của học sinh khi nhà trường sử dụng dịch vụ quản lý trường học Trường Nhà ở địa chỉ: http://truongnha.com.
+						</p>
+						<p>
+							<strong>Hướng dẫn.</strong>
+							Để sử dụng sổ liên lạc này trước hết nhà trường phải sử dụng dịch vụ Trường Nhà tại địa chỉ http://truongnha.com. 
+						</p>
+
+						<p>
+							Tiếp theo, bạn phải liên hệ với nhà trường để có tài khoản của học sinh. Tài khoản sẽ gồm có Tên tài khoản và Mật khẩu. Có hai thông tin này bạn nhập vào trong phần Học sinh trên màn hình chính và phải kết nối mạng Internet. Thông tin điểm, rèn luyện của học sinh sẽ được tải về và lưu trên máy. Sau đó nếu không có kết nối mạng bạn vẫn có thể xem thông tin, nhưng để có thông tin cập nhật thì phải kết nối mạng và giáo viên hoặc nhà trường phải nhập điểm vào hệ thống Trường Nhà trước đó.
+						</p>
+
+						<p>
+							<strong>Phiên bản: </strong>
+							0.7
+						</p>
+
+						<p>
+							<strong>Hỗ trợ.</strong>
+							Nếu có bất kỳ vấn đề gì, xin gửi thông tin bằng email đến contact@truongnha.com.
+						</p>
+
+					</div>
+				</div>
+				<!--End nav menu -->
+			</div>
+			<!-- End div content-->
+		</div>
+		<!-- END DIV AFUI -->
+		
+		<div id="loading" class="ui-loader">
+			<span class="ui-icon ui-icon-loading spin" ></span>
+			<h1>Xin vui lòng đợi</h1>
+		</div>
+		
+    </body>
+</html>
+

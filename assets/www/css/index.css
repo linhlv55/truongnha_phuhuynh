@@ -1,0 +1,140 @@
+table
+{
+        border-collapse:collapse;
+        padding:3px 7px 2px 7px;
+        width:100%;
+}
+table, td, th
+{
+        border:1px solid #ccc;
+        position: relative;
+        padding: 5px 20px;
+}
+table th{
+        font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+        padding: 5px 20px;
+        
+        z-index: 20;
+        height: 30px;
+        cursor: pointer;
+        color: #777;
+        text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
+        line-height: 33px;
+        font-size: 19px;
+        background: linear-gradient(top, #ffffff 1%,#eaeaea 100%);
+        box-shadow: 
+        0px 0px 0px 1px rgba(155,155,155,0.3), 
+        1px 0px 0px 0px rgba(255,255,255,0.9) inset, 
+        0px 2px 2px rgba(0,0,0,0.1);
+}
+
+#afui #menu .list > li > a {
+        background: inherit;
+        color: inherit;
+        font-size: 1em;
+}
+
+
+#aaaaa{
+        background-color: #ECFFB3;
+}
+#logo {
+        font-size: 1.5em;
+        line-height: 1.5em;
+}
+
+.logo-truong {
+        font-size: 30px;
+        color: rgba(0, 136, 204, 0.75);
+}
+.logo-nha{
+        font-size: 30px;
+        color: rgba(255, 69, 0, 0.75);
+}
+h4{
+        display:inline;
+        text-align:center; 
+}
+h2{
+        display:inline;
+        text-align:center; 
+        }       
+h5{
+        display:inline;
+        text-align:center; 
+}
+                
+p {display:inline;}
+
+.form[name="login"]{
+        width: 100%;
+        margin: 0px auto;
+}
+a#login.button{
+        float: right;
+}
+a#update.button{
+	float: right;
+}
+/*
+* Thành vi?t css
+* Trang chu: left
+* Tuy chon: right
+*/
+.header-left {
+        float:left;
+}
+
+.header-right {
+        float:right;
+}
+
+.color-mieng {
+        color:#00CCFF;
+}
+
+.color-15phut {
+        color:#00CC00;
+}
+.color-1tiet {
+        color:#3333FF;
+}
+.color-thi {
+        color:#003300;
+}
+.color-hocky {
+        color:#FF0000;
+}
+.ui-loader {
+        style="z-index: 20000; 
+        top: 50%; 
+        display:none;
+}
+#color {
+        width:100%; 
+        text-align:center;
+        display:none";
+}
+
+.header-left {
+        padding-left: 10px;
+        padding-top: 5px;
+}
+
+.header-right {
+        padding-right: 10px;
+        padding-top: 5px;
+}
+#icon_refresh{
+	text-align: right;
+}
+
+
+.new-attendance-bold
+{
+	font-weight:bold;
+}
+.new-mark-bold
+{
+	font-weight:bold;
+}

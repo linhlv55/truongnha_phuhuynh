@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Trường nhà</title>
+	<link rel="stylesheet"  href="css/jquery.mobile-1.3.1.min.css">
+	<link rel="stylesheet" href="http://designmodo.com/demo/calendarjquerycss3/css/calendar.css" media="screen">
+	<style type="text/css">
+		.ui-datepicker .specialDate a { background: #006400; }
+		.ui-datepicker .specialDate1 a { background: #e81e46;    }																												
+		.ui-datepicker .specialDate2 a { background: #6495ED; }
+	</style>
+	
+	<!--<script type="text/javascript" src="cordova.js"></script>-->
+	
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery.mobile-1.3.1.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/getDatabase.js"></script>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="jquery-ui-datepicker.min.js"></script>
+	<script type="text/javascript" src="js/connectServer.js"></script>
+	<script type="text/javascript">
+//		document.addEventListener("deviceready", OK, false);
+		function exit(){
+			navigator.app.exitApp();
+		}
+		$(document).ready(function(){
+			
+		});
+		function createRadioButton(){
+			//alert(document.getElementById("test").innerHTML);
+			var value = "<button class='	ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all' >Click</button>";
+			
+			document.getElementById("test").innerHTML=value;
+		}
+	</script>
+	
+</head>
+	
+<body onload=deviceOK() >
+	
+	
+	
+	<div data-role="header" data-position="fixed">
+		<h1>Truong nha</h1>
+		<a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slideup" data-icon="gear" data-theme="e">Actions...</a>
+		<div data-role="popup" id="popupMenu" data-theme="d">
+			<ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
+				<li data-role="divider" data-theme="e">Choose an action</li>
+				<li><a href="#" onClick=exit()>Exit</a></li>
+				<li><a href="#" onClick=signout()>Sign out</a></li>
+				<li><a href="#" onClick=displayProfileUser()>Profile user</a></li>
+			</ul>
+		</div>
+	</div> <!-- end header-->
+
+	
+	<button onClick=getInfo()>Get info</button>
+	<button onClick=openCBAttendance()>Get attendance</button>
+	<button onClick=createRadioButton()>RadioButton</button>
+	<div data-role="content">
+		
+		<div id="test">
+			22222
+		</div>
+		<button onclick="displayCalendar()">Calendar</button>
+		<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" id="controlgroup">
+			<legend>Hiển thị điểm danh</legend>
+				<input type="radio" name="radio-choice-b" id="radio-choice-c" value="list" checked="checked" onclick="getAttendanceJson()">
+				<label for="radio-choice-c">Bảng</label>
+				<input type="radio" name="radio-choice-b" id="radio-choice-d" value="grid" onclick = "displayCalendar()" >
+				<label for="radio-choice-d">Dạng lịch</label>
+		</fieldset>
+		
+		<div>
+			<div id="calendar">
+			</div>
+			<div id="displayContent">
+				<table cellspacing="0" id="table-custom-2" BORDER="1">
+				</table>
+			</div>
+		</div>
+	</div><!-- end content -->
+	
+	
+	<div data-role="footer" data-position="fixed" >
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#" data-icon="grid" onclick="Mark()">Ngay thang</a></li>
+				<li><a href="#" data-icon="check" onClick="Attendance()">Diem danh</a></li>
+				<li><a href="#" data-icon="edit" onClick="openCBMarkStudent()">Mon hoc</a></li>
+			</ul>
+		</div>
+	</div><!-- /footer -->
+</select>
+</body>
+</html>
